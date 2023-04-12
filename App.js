@@ -10,7 +10,7 @@ const PlaceholderImage = require('./assets/images/paduck.jpg')
 
 export default function App() {
 
-  const [selectedImage,setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [showAppOptions, setShowAppOptions] = useState(false);
 
 
@@ -29,18 +29,23 @@ export default function App() {
   };
 
 
+
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-      <ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage}/>
+        <ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
       </View>
-      {showAppOptions ? (<View />):(
-       <View style={styles.footerContainer}>
-       <Button theme="primary" label="사진을 고르세요" onPress={pickImageAsync}/>
-       <Button label="이 사진으로!" onPress={()=>setShowAppOptions(true)} />
-     </View>
+      {showAppOptions ? (
+        <View>
+          <Button label="다시 고르기" onPress={() => setShowAppOptions(false)} />
+        </View>) : (
+        <View style={styles.footerContainer}>
+          <Button theme="primary" label="사진을 고르세요" onPress={pickImageAsync} />
+          <Button label="이 사진으로!" onPress={() => setShowAppOptions(true)} />
+        </View>
       )}
-      
+
       <StatusBar style="auto" />
     </View>
   );
