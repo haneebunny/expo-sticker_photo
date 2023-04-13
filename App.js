@@ -26,8 +26,12 @@ export default function App() {
   const [pickedEmoji, setPickedEmoji] = useState(null);
   const [status, requestPermission] = MediaLibrary.usePermissions();
 
+  const [pickedEmojis, setPickedEmojis] = useState([]);
+
+  // reset 버튼을 누르면 처음으로 이동, 붙였던 이모지는 사라진다.
   const onReset = () => {
     setShowAppOptions(false);
+    setPickedEmoji(null)
   };
 
   const onAddSticker = () => {
@@ -47,7 +51,7 @@ export default function App() {
 
       await MediaLibrary.saveToLibraryAsync(localUri);
       if (localUri) {
-        alert("Saved!");
+        alert("저장 되었다!");
       }
     } catch (e) {
       console.log(e);
@@ -63,7 +67,7 @@ export default function App() {
       setSelectedImage(result.assets[0].uri);
 
     } else {
-      alert('You did not select any image.');
+      alert('이미지를 선택해달라.');
     }
   };
 
@@ -78,6 +82,10 @@ export default function App() {
       <View style={styles.imageContainer}>
         <View ref={imageRef} collapsable={false}>
           <ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
+          {pickedEmojis?.map((emoji) => (
+            <EmojiSticker imageSize={40} stickerSource={emoji} />
+          ))
+          }
           {pickedEmoji !== null ? <EmojiSticker imageSize={40} stickerSource={pickedEmoji} /> : null}
 
         </View>
@@ -91,12 +99,12 @@ export default function App() {
           </View>
         </View>) : (
         <View style={styles.footerContainer}>
-          <Button theme="primary" label="사진을 고르세요" onPress={pickImageAsync} />
+          <Button theme="primary" label="사진 고르기" onPress={pickImageAsync} />
           <Button label="이 사진으로!" onPress={() => setShowAppOptions(true)} />
         </View>
       )}
       <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
-        <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
+        <EmojiList onSelect={setPickedEmojis} onCloseModal={onModalClose} pickedEmojis={pickedEmojis} />
       </EmojiPicker>
       <StatusBar style="auto" />
 
@@ -119,29 +127,6 @@ const styles = StyleSheet.create({
     width: 320,
     height: 440,
     borderRadius: 18,
-  },
-  buttonContainer: {
-    width: 320,
-    height: 68,
-    marginHorizontal: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 3,
-  },
-  button: {
-    borderRadius: 10,
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  buttonIcon: {
-    paddingRight: 8,
-  },
-  buttonLabel: {
-    color: '#fff',
-    fontSize: 16,
   },
   footerContainer: {
     flex: 1 / 3,
