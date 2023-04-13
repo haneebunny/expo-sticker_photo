@@ -5,7 +5,7 @@ export default function Button({ label, theme, onPress }) {
   if (theme === "primary") {
     return (
       <View
-      style={[styles.buttonContainer, { borderWidth: 4, borderColor: "#93d7cb", borderRadius: 18 }]}
+        style={[styles.buttonContainer, { borderRadius: 18 }]}
       >
         <Pressable
           style={[styles.button, { backgroundColor: "#fff" }]}
@@ -18,43 +18,48 @@ export default function Button({ label, theme, onPress }) {
             style={styles.buttonIcon}
           />
           <Text style={[styles.buttonLabel, { color: "#25292e" }]}>{label}</Text>
-          
+
         </Pressable>
-    </View>
+      </View>
     );
   }
 
   return (
     <View style={styles.buttonContainer}>
-        <Pressable style={styles.button} onPress={onPress}>
-          <Text style={styles.buttonLabel}>{label}</Text>
-        </Pressable>
-      </View>
+      <Pressable style={styles.button} hoverStyle={[styles.buttonHover, styles.button]} onPress={onPress}>
+        <Text style={styles.buttonLabel}>{label}</Text>
+      </Pressable>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-    buttonContainer: {
-      width: 320,
-      height: 68,
-      marginHorizontal: 20,
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 3,
-    },
-    button: {
-      borderRadius: 10,
-      width: '100%',
-      height: '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'row',
-    },
-    buttonIcon: {
-      paddingRight: 8,
-    },
-    buttonLabel: {
-      color: '#fff',
-      fontSize: 16,
-    },
-  });
+  buttonContainer: {
+    width: 320,
+    height: 68,
+    marginHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 3,
+    backgroundColor: '#ffffff',
+    borderRadius: 18,
+  },
+  buttonHover: {
+    backgroundColor: '#b0dad0'
+  },
+  button: {
+    borderRadius: 10,
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  buttonIcon: {
+    paddingRight: 8,
+  },
+  buttonLabel: {
+    // color: '#fff',
+    fontSize: 16,
+  },
+});
