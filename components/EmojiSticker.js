@@ -40,6 +40,8 @@ export default function EmojiSticker({ imageSize, stickerSource }) {
             translateY.value = event.translationY + context.translateY;
         },
     });
+    // onStart() : 제스처가 시작되거나 초기 위치에 있을 때
+    // onActive() : 제스처가 활성화되어 있고 움직이는 경우 
 
     const containerStyle = useAnimatedStyle(() => {
         return {
