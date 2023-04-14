@@ -128,7 +128,6 @@ export default function App() {
           <View style={styles.footerContainer}>
             <Button theme="primary" label="사진 고르기" onPress={pickImageAsync} />
             <Button label="이 사진으로!" onPress={() => setShowAppOptions(true)} />
-            <Button label="지도로" onPress={() => setShowAppOptions(true)} />
           </View>
         )}
         <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
