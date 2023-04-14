@@ -6,6 +6,8 @@ import { captureRef } from 'react-native-view-shot';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 import domtoimage from 'dom-to-image';
+import "react-native-gesture-handler";
+
 
 // components
 import ImageViewer from './components/ImageViewer';
@@ -26,9 +28,11 @@ export default function App() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [showAppOptions, setShowAppOptions] = useState(false);
   const [pickedEmoji, setPickedEmoji] = useState(null);
+  const [pickedEmojis, setPickedEmojis] = useState([]);
+
   const [status, requestPermission] = MediaLibrary.usePermissions();
 
-  const [pickedEmojis, setPickedEmojis] = useState([]);
+
 
   // reset 버튼을 누르면 처음으로 이동, 붙였던 이모지는 사라진다.
   const onReset = () => {
